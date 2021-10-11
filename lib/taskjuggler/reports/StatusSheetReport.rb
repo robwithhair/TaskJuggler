@@ -78,7 +78,11 @@ class TaskJuggler
                                         @report.get('rollupResource'),
                                         @report.get('openNodes'))
       # Prepare a template for the Query we will use to get all the data.
-      scenarioIdx = a('scenarios')[0]
+      unless (trackingScenarioIdx = @project['trackingScenarioIdx'])
+        error('no_tracking_scen', 'No trackingscenario defined')
+      end
+
+      scenarioIdx = trackingScenarioIdx
       queryAttrs = { 'project' => @project,
                      'scopeProperty' => nil,
                      'scenarioIdx' => scenarioIdx,
